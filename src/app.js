@@ -2,6 +2,7 @@ const fixture = require('./fixtures');
 const CartItem = require('./models/cartItems');
 const promotion = require('./models/promotions');
 const receipt = require('./models/receipt');
+const totalPriceReceipt = require('./models/totalPriceReceipt');
 
 
 function printReceipt(tags) {
@@ -82,7 +83,7 @@ function buildReceipt(receiptItems) {
     savedTotal += receiptItem.saved;
   }
 
-  return {receiptItems, total, savedTotal}
+  return new totalPriceReceipt(receiptItems, total, savedTotal)
 }
 
 function buildReceiptText(receipt) {
