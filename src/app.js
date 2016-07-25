@@ -12,23 +12,11 @@ function printReceipt(tags) {
 
   const receipt = totalPriceReceipt.buildReceipt(receiptItems);
 
-  const receiptText = buildReceiptText(receipt);
+  const receiptText = receipt.buildReceiptsText();
 
   console.log(receiptText);
 }
 
-/*function buildReceipt(receiptItems) {
-
-  let total = 0;
-  let savedTotal = 0;
-
-  for (const receiptItem of receiptItems) {
-    total += receiptItem.subtotal;
-    savedTotal += receiptItem.saved;
-  }
-
-  return new totalPriceReceipt(receiptItems, total, savedTotal)
-}*/
 
 function buildReceiptText(receipt) {
 
