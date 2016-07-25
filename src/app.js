@@ -1,4 +1,3 @@
-const fixture = require('./fixtures');
 const CartItem = require('./models/cartItems');
 const promotion = require('./models/promotions');
 const receipt = require('./models/receipt');
@@ -7,7 +6,7 @@ const totalPriceReceipt = require('./models/totalPriceReceipt');
 
 function printReceipt(tags) {
 
-  const cartItems = buildCartItems(tags, CartItem.item());
+  const cartItems = CartItem.buildCartItems(tags, CartItem.item());
 
   const receiptItems = buildReceiptItems(cartItems, promotion.promotions());
 
@@ -18,28 +17,7 @@ function printReceipt(tags) {
   console.log(receiptText);
 }
 
-function buildCartItems(tags, allItems) {
 
-  const cartItems = [];
-
-  for (const tag of tags) {
-
-    const tagArray = tag.split('-');
-    const barcode = tagArray[0];
-    const count = parseFloat(tagArray[1] || 1);
-
-    const cartItem = cartItems.find(cartItem => cartItem.item.barcode === barcode);
-
-    if (cartItem) {
-      cartItem.count += count;
-    } else {
-      const item = allItems.find(item => item.barcode === barcode);
-      cartItems.push({item, count});
-    }
-  }
-
-  return cartItems;
-}
 
 function buildReceiptItems(cartItems, allPromotions) {
   return cartItems.map(cartItem => {
