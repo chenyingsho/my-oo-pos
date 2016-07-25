@@ -1,4 +1,5 @@
 const cartItems = require('./models/cartItems');
+const promotion = require('./models/promotions');
 function loadAllItems() {
   return [
     new cartItems('ITEM000000', '可口可乐', '瓶', 3.00),
@@ -12,14 +13,7 @@ function loadAllItems() {
 
 function loadPromotions() {
   return [
-    {
-      type: 'BUY_TWO_GET_ONE_FREE',
-      barcodes: [
-        'ITEM000000',
-        'ITEM000001',
-        'ITEM000005'
-      ]
-    }
+     new promotion('BUY_TWO_GET_ONE_FREE', ['ITEM000000', 'ITEM000001', 'ITEM000005'])
   ];
 }
 
