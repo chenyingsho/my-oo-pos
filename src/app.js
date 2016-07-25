@@ -1,6 +1,6 @@
 const CartItem = require('./models/cartItems');
 const promotion = require('./models/promotions');
-const receipt = require('./models/receipt');
+const receipts = require('./models/receipt');
 const totalPriceReceipt = require('./models/totalPriceReceipt');
 
 
@@ -8,47 +8,13 @@ function printReceipt(tags) {
 
   const cartItems = CartItem.buildCartItems(tags, CartItem.item());
 
-  const receiptItems = buildReceiptItems(cartItems, promotion.promotions());
+  const receiptItems = receipts.buildReceiptItems(cartItems, promotion.promotions());
 
   const receipt = buildReceipt(receiptItems);
 
   const receiptText = buildReceiptText(receipt);
 
   console.log(receiptText);
-}
-
-
-
-function buildReceiptItems(cartItems, allPromotions) {
-  return cartItems.map(cartItem => {
-
-    const promotionType = findPromotionType(cartItem.item.barcode, allPromotions);
-
-    const {saved, subtotal} = discount(cartItem.count, cartItem.item.price, promotionType);
-
-    return new receipt(cartItem,saved,subtotal);
-  });
-}
-
-function discount(count, price, promotionType) {
-
-  let subtotal = count * price;
-  let saved = 0;
-
-  if (promotionType === 'BUY_TWO_GET_ONE_FREE') {
-    saved = parseInt(count / 3) * price;
-  }
-
-  subtotal -= saved;
-
-  return {saved, subtotal};
-}
-
-function findPromotionType(barcode, promotions) {
-
-  const promotion = promotions.find(promotion => promotion.barcodes.some(b => b === barcode));
-
-  return promotion ? promotion.type : undefined;
 }
 
 function buildReceipt(receiptItems) {

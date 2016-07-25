@@ -1,6 +1,4 @@
-/**
- * Created by chenying on 16-7-25.
- */
+
 class totalPriceReceipt {
 
   constructor(receiptItems, total, savedTotal) {
