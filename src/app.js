@@ -12,13 +12,13 @@ function printReceipt(tags) {
 
   const receipt = totalPriceReceipt.buildReceipt(receiptItems);
 
-  const receiptText = receipt.buildReceiptsText();
+  const receiptText = receipt.buildReceiptText();
 
   console.log(receiptText);
 }
 
 
-function buildReceiptText(receipt) {
+/*function buildReceiptText(receipt) {
 
   let receiptItemsText = receipt.receiptItems
     .map(receiptItem => {
@@ -40,6 +40,6 @@ ${receiptItemsText}
 
 function formatMoney(money) {
   return money.toFixed(2);
-}
+}*/
 
 exports.printReceipt = printReceipt;
